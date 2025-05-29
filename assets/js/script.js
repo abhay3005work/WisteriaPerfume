@@ -1,5 +1,60 @@
 // Wait for DOM content to load
 document.addEventListener("DOMContentLoaded", function() {
+  // Loader functionality
+  const loader = document.querySelector('.loader-container');
+  
+  if (loader) {
+    // Preload critical resources before showing content
+    window.addEventListener('load', function() {
+      // Add a smooth transition to hide the loader
+      setTimeout(function() {
+        loader.classList.add('loader-hidden');
+        
+        // Remove loader from DOM after transition completes
+        loader.addEventListener('transitionend', function(e) {
+          // Only remove when the opacity transition ends
+          if (e.propertyName === 'opacity' && loader.parentNode) {
+            loader.parentNode.removeChild(loader);
+          }
+        });
+      }, 2500); // Slightly longer delay for a more polished feel
+    });
+    
+    // Enhanced particles for loader
+    const loaderWrapper = document.querySelector('.loader-wrapper');
+    if (loaderWrapper) {
+      // Create more varied particles
+      for (let i = 0; i < 12; i++) {
+        const particle = document.createElement('div');
+        particle.classList.add('particle');
+        
+        // Create a more artistic particle distribution
+        const angle = Math.random() * Math.PI * 2; // Random angle
+        const distance = 20 + Math.random() * 30; // Random distance from center (20-50%)
+        const centerX = 50;
+        const centerY = 50;
+        
+        // Calculate position based on angle and distance
+        const x = centerX + Math.cos(angle) * distance;
+        const y = centerY + Math.sin(angle) * distance;
+        
+        particle.style.top = y + '%';
+        particle.style.left = x + '%';
+        
+        // More varied animation timing
+        particle.style.animationDelay = (Math.random() * 4) + 's';
+        particle.style.animationDuration = (Math.random() * 3 + 3) + 's';
+        
+        // Varied sizes for more organic feel
+        const size = (Math.random() * 2 + 2);
+        particle.style.width = size + 'px';
+        particle.style.height = size + 'px';
+        
+        loaderWrapper.appendChild(particle);
+      }
+    }
+  }
+  
   // Navigation scroll effect
   const nav = document.querySelector('.main-nav');
   

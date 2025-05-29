@@ -10,6 +10,36 @@
     <link rel="stylesheet" href="./assets/css/style.css" />
   </head>
   <body>
+    <!-- Cute Loader -->
+    <div class="loader-container">
+      <div class="loader-wrapper">
+        <svg class="flower-loader" viewBox="0 0 100 100">
+          <defs>
+            <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+              <feGaussianBlur stdDeviation="3" result="blur" />
+              <feColorMatrix in="blur" type="matrix" values="
+                1 0 0 0 0
+                0 1 0 0 0
+                0 0 1 0 0
+                0 0 0 18 -7" result="glow" />
+              <feBlend in="SourceGraphic" in2="glow" mode="normal" />
+            </filter>
+            <linearGradient id="petalGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#a776c7" />
+              <stop offset="100%" stop-color="#8a5fa4" />
+            </linearGradient>
+            <radialGradient id="centerGradient" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
+              <stop offset="0%" stop-color="#65c789" />
+              <stop offset="100%" stop-color="#458d61" />
+            </radialGradient>
+          </defs>
+          <path class="flower-shape" fill="url(#petalGradient)" d="M50,15 C60,25 70,10 80,15 90,20 85,40 90,50 95,60 80,70 80,80 80,90 60,85 50,90 40,95 30,80 20,80 10,80 5,60 10,50 15,40 10,30 20,20 30,10 40,5 50,15"></path>
+          <circle class="flower-center" fill="url(#centerGradient)" cx="50" cy="50" r="12"></circle>
+        </svg>
+        <div class="loader-text">Wisteria</div>
+      </div>
+    </div>
+    
     <!-- Navigation -->
     <nav class="main-nav">
       <div class="nav-wrapper">

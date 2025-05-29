@@ -9,6 +9,144 @@
   font-display: swap;
 }
 
+/* Loader Styles */
+.loader-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #0f0f11;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  transition: opacity 0.8s cubic-bezier(0.65, 0, 0.35, 1), visibility 0.8s cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+.loader-hidden {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.loader-wrapper {
+  position: relative;
+  width: 150px;
+  height: 150px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: floatAnimation 6s cubic-bezier(0.42, 0, 0.58, 1) infinite;
+}
+
+.loader-wrapper::before {
+  content: '';
+  position: absolute;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(156, 107, 184, 0.15) 0%, rgba(77, 156, 106, 0.08) 40%, rgba(18, 18, 20, 0) 70%);
+  border-radius: 50%;
+  transform: scale(1.2);
+  opacity: 0.6;
+  animation: glowPulse 4s cubic-bezier(0.42, 0, 0.58, 1) infinite;
+}
+
+.flower-loader {
+  width: 100%;
+  height: 100%;
+  filter: drop-shadow(0 0 6px rgba(156, 107, 184, 0.4));
+  animation: rotateAnimation 20s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite;
+}
+
+.flower-shape {
+  fill: #9c6bb8;
+  opacity: 0.85;
+  stroke: rgba(232, 190, 255, 0.3);
+  stroke-width: 0.5;
+  filter: url(#glow);
+  animation: morphAnimation 10s cubic-bezier(0.76, 0, 0.24, 1) infinite;
+}
+
+.flower-center {
+  fill: #4d9c6a;
+  opacity: 0.85;
+  filter: drop-shadow(0 0 3px rgba(77, 156, 106, 0.5));
+  stroke: rgba(156, 230, 179, 0.4);
+  stroke-width: 0.8;
+  animation: pulseAnimation 4s cubic-bezier(0.42, 0, 0.58, 1) infinite;
+}
+
+.loader-text {
+  position: absolute;
+  bottom: -30px;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 300;
+  font-size: 12px;
+  letter-spacing: 4px;
+  color: #9c6bb8;
+  text-transform: uppercase;
+  opacity: 0;
+  animation: fadeInOut 2.5s cubic-bezier(0.42, 0, 0.58, 1) forwards 0.5s;
+}
+
+@keyframes morphAnimation {
+  0% { d: path("M50,15 C60,25 70,10 80,15 90,20 85,40 90,50 95,60 80,70 80,80 80,90 60,85 50,90 40,95 30,80 20,80 10,80 5,60 10,50 15,40 10,30 20,20 30,10 40,5 50,15"); }
+  20% { d: path("M50,10 C65,15 75,25 85,40 95,55 90,65 85,75 80,85 65,90 50,90 35,90 20,85 15,75 10,65 5,55 15,40 25,25 35,15 50,10"); }
+  40% { d: path("M50,20 C65,20 75,35 75,50 75,65 65,80 50,80 35,80 25,65 25,50 25,35 35,20 50,20"); }
+  60% { d: path("M50,15 C65,5 80,15 85,30 90,45 85,65 75,75 65,85 45,90 35,80 25,70 20,55 15,40 10,25 20,10 35,10 40,10 45,15 50,15"); }
+  80% { d: path("M50,10 C60,5 75,10 85,25 90,35 90,55 85,70 75,85 60,90 50,85 40,90 25,85 15,70 10,55 10,35 15,25 25,10 40,5 50,10"); }
+  100% { d: path("M50,15 C60,25 70,10 80,15 90,20 85,40 90,50 95,60 80,70 80,80 80,90 60,85 50,90 40,95 30,80 20,80 10,80 5,60 10,50 15,40 10,30 20,20 30,10 40,5 50,15"); }
+}
+
+@keyframes rotateAnimation {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes floatAnimation {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+  100% { transform: translateY(0); }
+}
+
+@keyframes pulseAnimation {
+  0% { transform: scale(1); filter: drop-shadow(0 0 3px rgba(77, 156, 106, 0.4)); }
+  50% { transform: scale(1.15); filter: drop-shadow(0 0 8px rgba(77, 156, 106, 0.6)); }
+  100% { transform: scale(1); filter: drop-shadow(0 0 3px rgba(77, 156, 106, 0.4)); }
+}
+
+@keyframes glowPulse {
+  0% { opacity: 0.3; transform: scale(1.2); }
+  50% { opacity: 0.5; transform: scale(1.5); }
+  100% { opacity: 0.3; transform: scale(1.2); }
+}
+
+@keyframes fadeInOut {
+  0% { opacity: 0; transform: translateY(5px); }
+  100% { opacity: 0.8; transform: translateY(0); }
+}
+
+/* Particles for loader */
+.particle {
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  background: radial-gradient(circle, rgba(156, 107, 184, 0.8) 0%, rgba(156, 107, 184, 0) 70%);
+  border-radius: 50%;
+  opacity: 0;
+  animation: particleFloat 5s cubic-bezier(0.42, 0, 0.58, 1) infinite;
+}
+
+@keyframes particleFloat {
+  0% { transform: translateY(0) translateX(0); opacity: 0; }
+  20% { opacity: 0.5; }
+  80% { opacity: 0.5; }
+  100% { transform: translateY(-35px) translateX(10px); opacity: 0; }
+}
+
 /* Custom Scrollbar */
 ::-webkit-scrollbar {
   width: 10px;
